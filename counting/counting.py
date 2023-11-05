@@ -199,6 +199,11 @@ def safe_eval(string: str):
             "invalid syntax"
         ):  # False-positives from messages starting with most symbols (?abc)
             pass
+        elif (
+            err_str.startswith("EOL while scanning string literal")
+            and string.count("'") % 2 == 1
+        ):  # Unclosed string literal, from an apostrophe -- likely cause is normal speech
+            pass
         else:
             fail_msg = f"```py\n{repr(e).replace('`', '[backtick]')}\n```"
     except (Exception,):
