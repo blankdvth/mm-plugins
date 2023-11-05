@@ -11,7 +11,7 @@ import simpleeval
 from discord.ext import commands
 from pebble import concurrent
 
-VERSION = "2.1.1"
+VERSION = "2.1.2"
 COUNTING_CHANNEL = 1162804188800102501
 DEVELOPER_ROLE = 1087928500893265991
 EVALUATION_TIMEOUT = 2  # Time in seconds after which to timeout
@@ -53,9 +53,14 @@ s.functions.update(  # Add additional functions
     tan=lambda x: math.tan(
         math.radians(x)
     ),  # tan takes radians, input as degrees is simpler, so convert deg -> rad
+    asin=lambda x: math.asin(math.radians(x)),
+    acos=lambda x: math.acos(math.radians(x)),
+    atan=lambda x: math.atan(math.radians(x)),
     degrees=math.degrees,  # Offer rad -> deg conversion
     radians=math.radians,  # Offer deg -> rad conversion
     abs=abs,
+    ord=ord,
+    len=len,
     bitxor=op.xor,  # Reimplement bitwise XOR (^), which was removed to curb symbol confusion
     bitor=op.or_,  # Reimplement bitwise OR (|), which was removed to curb symbol confusion,
     log=lambda x, base=10: math.log(x, base),  # Log with default base 10
